@@ -1,4 +1,4 @@
-import React from "react";
+import React, { use, useEffect, useState } from "react";
 import { FaUser } from "react-icons/fa";
 import { FaGear } from "react-icons/fa6";
 import { GoHomeFill } from "react-icons/go";
@@ -7,8 +7,22 @@ import { IoLogoModelS } from "react-icons/io";
 import { IoLogIn, IoLogOut } from "react-icons/io5";
 import { LuRotate3D } from "react-icons/lu";
 import { Link, NavLink } from "react-router";
+import { AuthContext } from "../Context/AuthContext";
 
 const NavBar = () => {
+  const {user, signOutUser} = use(AuthContext);
+
+  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light')
+
+  useEffect(()=>{
+    const html = document.querySelector('html')
+      html.setAttribute('data-theme', theme)
+      localStorage.setItem('theme', theme)  
+  }, [theme])
+
+  const handleTheme = (checked)=>{
+    setTheme(checked ? 'dark': 'light')
+  }
   return (
     <div className="navbar py-0 min-h-0 z-1 shadow-sm rounded-full glass-card max-w-7xl">
       <div className="navbar-start">
@@ -77,7 +91,7 @@ const NavBar = () => {
           </li> */}
         </ul>
       </div>
-       {/* <div className="navbar-end gap-3">
+       <div className="navbar-end gap-3">
         {user ? (
           <div className="dropdown dropdown-end z-50">
             <div
@@ -150,7 +164,7 @@ const NavBar = () => {
             <IoLogIn /> Login
           </Link>
         )}
-      </div> */}
+      </div>
     </div>
   );
 };
