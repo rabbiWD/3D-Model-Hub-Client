@@ -5,6 +5,8 @@ import AllModels from "../Pages/AllModels/AllModels";
 import AddModels from "../Pages/AddModels/AddModels";
 import Register from "../Pages/Auth/Register";
 import Login from "../Pages/Auth/Login";
+import ModelDetails from "../Pages/ModelDetails/ModelDetails";
+import UpdateModel from "../Pages/UpdateModel/UpdateModel";
 
 
 
@@ -16,7 +18,7 @@ export const router = createBrowserRouter([
             {
                 path: '/',
                 element: <Home />,
-                loader: ()=> fetch('http://localhost:3000/models')
+                loader: ()=> fetch('http://localhost:3000/latest-models')
             },
             {
                 path: '/all-models',
@@ -28,13 +30,24 @@ export const router = createBrowserRouter([
                 element: <AddModels />
             },
             {
+                path: '/model-details/:id',
+                element:  <ModelDetails/>,
+                loader: ({params})=> fetch(`http://localhost:3000/models/${params.id}`)
+            },
+            {
+                path: '/update-model/:id',
+                element: <UpdateModel/>,
+                loader: ({params})=> fetch(`http://localhost:3000/models/${params.id}`)
+            },
+            {
                 path: '/auth/register',
                 element: <Register/>,
             },
             {
                 path: '/auth/login',
                 element: <Login/>,
-            }
+            },
+            
         ]
     }
 ])
