@@ -1,6 +1,7 @@
 import React, { use } from 'react';
 import { AuthContext } from '../../Context/AuthContext';
 import { useNavigate } from 'react-router';
+import toast from 'react-hot-toast';
 
 const AddModels = () => {
   const {user} = use(AuthContext)
@@ -14,12 +15,12 @@ const AddModels = () => {
             name: e.target.name.value,
             category: e.target.category.value,
             description: e.target.description.value,
-            thumbnail: e.target.thumbnail.value,
+            thumbnailUrl: e.target.thumbnail.value,
             created_at: new Date(),
             downloads: 0,
             created_by: user.email
         }
-       fetch('http://localhost:3000/models',{
+       fetch('https://3d-model-hub-server-three.vercel.app/models',{
         method: 'POST',
         headers: {
           'content-type': 'application/json',
@@ -28,6 +29,7 @@ const AddModels = () => {
        })
        .then( res=> res.json())
        .then(data=>{
+        toast.success('Successfully added')
         console.log(data);
         navigate('/all-models')
        })

@@ -15,7 +15,7 @@ const UpdateModel = () => {
             description: e.target.description.value,
             thumbnailUrl: e.target.thumbnailUrl.value,
         }
-        fetch(`http://localhost:3000/models/${model._id}`,{
+        fetch(`https://3d-model-hub-server-three.vercel.app/models/${model._id}`,{
         method: 'PUT',
         headers: {
           'content-type': 'application/json',

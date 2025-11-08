@@ -1,12 +1,15 @@
 import React from 'react';
 import { useLoaderData } from 'react-router';
 import { ModelCard } from '../../Components/ModelCard';
+import Banner from '../../Components/Banner';
 
 const Home = () => {
     const data = useLoaderData()
     console.log(data);
     return (
-        <div>
+        <div className=''>
+            <Banner></Banner>
+            
             <div>
                 <h2 className='text-center text-xl font-bold mt-10'>Latest Model</h2>
             </div>
